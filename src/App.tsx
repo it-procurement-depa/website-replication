@@ -1,16 +1,18 @@
 import { useState } from 'react'
-import { MagnifyingGlass, ArrowSquareOut } from '@phosphor-icons/react'
+import { 
+  MagnifyingGlass, 
+  ArrowSquareOut, 
+  GridFour,
+  Info,
+  CreditCard,
+  Wrench,
+  ChartLineUp,
+  NumberTwo,
+  Heart,
+  Toolbox,
+  ArrowRight
+} from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
-
-// Icon components to match the design
-const IconInfo = () => <span className="text-blue-400">ℹ️</span>
-const IconKey = () => <span className="text-yellow-400">🔑</span>
-const IconTool = () => <span className="text-green-400">🔧</span>
-const IconChart = () => <span className="text-purple-400">📊</span>
-const IconBolt = () => <span className="text-orange-400">⚡</span>
-const IconHealth = () => <span className="text-pink-400">💊</span>
-const IconUtility = () => <span className="text-cyan-400">🛠️</span>
-const IconNext = () => <span className="text-indigo-400">➡️</span>
 
 function App() {
   const [activeSection, setActiveSection] = useState('all-documentation')
@@ -20,56 +22,56 @@ function App() {
       id: 'all-documentation',
       title: 'All Documentation',
       subtitle: 'Browse all available documentation',
-      icon: '📄',
+      icon: GridFour,
       isActive: true
     },
     {
       id: 'about',
       title: 'About',
       subtitle: 'Plugin overview and introduction',
-      icon: IconInfo
+      icon: Info
     },
     {
       id: 'licenses',
       title: 'Licenses Manager',
       subtitle: 'License management and activation',
-      icon: IconKey
+      icon: CreditCard
     },
     {
       id: 'openings',
       title: 'Openings Tools',
       subtitle: 'Opening creation and modification tools',
-      icon: IconTool
+      icon: Wrench
     },
     {
       id: 'standards',
       title: 'Standards Tools',
       subtitle: 'Standard compliance and setup tools',
-      icon: IconChart
+      icon: ChartLineUp
     },
     {
       id: 'step2',
       title: 'Step 2 Tools',
       subtitle: 'Advanced workflow step 2 tools',
-      icon: IconBolt
+      icon: NumberTwo
     },
     {
       id: 'health',
       title: 'Model Health Tools',
       subtitle: 'Model validation and health checks',
-      icon: IconHealth
+      icon: Heart
     },
     {
       id: 'utilities',
       title: 'Utilities Tools',
       subtitle: 'General utility and helper tools',
-      icon: IconUtility
+      icon: Toolbox
     },
     {
       id: 'up-next',
       title: 'Up Next',
       subtitle: 'Upcoming features and tutorials',
-      icon: IconNext
+      icon: ArrowRight
     }
   ]
 
@@ -139,9 +141,7 @@ function App() {
         <div className="flex items-center justify-between px-6 py-4">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center text-primary-foreground font-bold text-sm">
-              dopa
-            </div>
+            <div className="w-8 h-8 bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm">depa</div>
             <span className="text-lg font-semibold">One Click Plugin</span>
             <span className="text-xs text-muted-foreground ml-2">
               Revit Plugin Documentation
@@ -167,14 +167,13 @@ function App() {
           </div>
         </div>
       </header>
-
       <div className="flex">
         {/* Sidebar */}
         <aside className="w-80 bg-card border-r border-border h-[calc(100vh-73px)] overflow-y-auto">
           <div className="p-6">
             <h3 className="text-sm font-medium text-muted-foreground mb-4">Documentation</h3>
             
-            <nav className="space-y-2">
+            <nav className="space-y-1">
               {navigationItems.map((item) => {
                 const isActive = activeSection === item.id
                 
@@ -183,23 +182,19 @@ function App() {
                     key={item.id}
                     variant="ghost"
                     onClick={() => setActiveSection(item.id)}
-                    className={`w-full justify-start h-auto p-3 ${
+                    className={`w-full justify-start h-auto p-4 rounded-lg ${
                       isActive 
-                        ? 'bg-muted text-foreground' 
+                        ? 'bg-primary/10 text-foreground border border-primary/20' 
                         : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                     }`}
                   >
-                    <div className="flex items-start gap-3">
-                      <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center">
-                        {typeof item.icon === 'string' ? (
-                          <span>{item.icon}</span>
-                        ) : (
-                          <item.icon />
-                        )}
+                    <div className="flex items-start gap-3 w-full">
+                      <div className="flex-shrink-0 w-4 h-4 flex items-center justify-center mt-0.5">
+                        <item.icon className={`w-4 h-4 ${isActive ? 'text-primary' : 'text-muted-foreground'}`} />
                       </div>
                       <div className="flex-1 min-w-0 text-left">
-                        <div className="font-medium text-sm">{item.title}</div>
-                        <div className="text-xs text-muted-foreground mt-1">{item.subtitle}</div>
+                        <div className={`font-medium text-sm ${isActive ? 'text-foreground' : ''}`}>{item.title}</div>
+                        <div className="text-xs text-muted-foreground mt-1 leading-relaxed">{item.subtitle}</div>
                       </div>
                     </div>
                   </Button>
@@ -227,14 +222,14 @@ function App() {
                   {/* Card Header */}
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-2">
-                      {card.title === 'About' && <IconInfo />}
-                      {card.title === 'Licenses Manager' && <IconKey />}
-                      {card.title === 'Openings Tools' && <IconTool />}
-                      {card.title === 'Standards Tools' && <IconChart />}
-                      {card.title === 'Step 2 Tools' && <IconBolt />}
-                      {card.title === 'Model Health Tools' && <IconHealth />}
-                      {card.title === 'Utilities Tools' && <IconUtility />}
-                      {card.title === 'Up Next' && <IconNext />}
+                      {card.title === 'About' && <Info className="w-4 h-4" />}
+                      {card.title === 'Licenses Manager' && <CreditCard className="w-4 h-4" />}
+                      {card.title === 'Openings Tools' && <Wrench className="w-4 h-4" />}
+                      {card.title === 'Standards Tools' && <ChartLineUp className="w-4 h-4" />}
+                      {card.title === 'Step 2 Tools' && <NumberTwo className="w-4 h-4" />}
+                      {card.title === 'Model Health Tools' && <Heart className="w-4 h-4" />}
+                      {card.title === 'Utilities Tools' && <Toolbox className="w-4 h-4" />}
+                      {card.title === 'Up Next' && <ArrowRight className="w-4 h-4" />}
                       <h3 className="font-semibold">{card.title}</h3>
                     </div>
                     <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">
@@ -268,7 +263,7 @@ function App() {
         </main>
       </div>
     </div>
-  )
+  );
 }
 
 export default App
