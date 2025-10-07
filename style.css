@@ -372,6 +372,77 @@ html {
     outline-offset: 2px;
 }
 
+/* Video Modal Styles */
+.video-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-modal-content {
+    background-color: #111111;
+    border-radius: 12px;
+    padding: 24px;
+    width: 90%;
+    max-width: 1200px;
+    max-height: 90%;
+    position: relative;
+}
+
+.video-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #333333;
+}
+
+.video-modal-header h3 {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.close-btn:hover {
+    background-color: #333333;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
 /* Animation for page load */
 @keyframes fadeInUp {
     from {
@@ -394,3 +465,15 @@ html {
 .tool-card:nth-child(4) { animation-delay: 0.4s; }
 .tool-card:nth-child(5) { animation-delay: 0.5s; }
 .tool-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* Mobile responsive for video modal */
+@media (max-width: 768px) {
+    .video-modal-content {
+        width: 95%;
+        padding: 16px;
+    }
+    
+    .video-modal-header h3 {
+        font-size: 16px;
+    }
+}

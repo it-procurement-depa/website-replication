@@ -1,12 +1,197 @@
 // One Click Plugin Documentation - Interactive Features
 
+// SharePoint video URLs mapping
+const videoUrls = {
+    'About': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
+    'Licenses Manager': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
+    'Openings Tools': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
+    'Standards Tools': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
+    'Step 2 Tools': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
+    'Model Health Tools': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
+    'Utilities Tools': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
+    'Up Next': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ'
+};
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all interactive features
     initializeNavigation();
     initializeSearch();
     initializeCardInteractions();
     initializeScrollEffects();
+    initializeVideoModal();
 });
+
+// Video functionality
+function openVideo(title) {
+    const modal = document.getElementById('videoModal');
+    const videoTitle = document.getElementById('videoTitle');
+    const videoFrame = document.getElementById('videoFrame');
+    
+    if (videoUrls[title]) {
+        // Since SharePoint videos require authentication, we'll try iframe first
+        // and provide fallback instructions if needed
+        const sharePointUrl = videoUrls[title];
+        const embedUrl = convertSharePointUrlToEmbed(sharePointUrl);
+        
+        videoTitle.textContent = title + ' - Video Guide';
+        
+        // Try to load the video in iframe
+        videoFrame.src = embedUrl;
+        videoFrame.onload = function() {
+            // If iframe loads successfully, show it
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        };
+        
+        videoFrame.onerror = function() {
+            // If iframe fails, show instructions instead
+            showVideoInstructions(title, sharePointUrl);
+        };
+        
+        // Show modal immediately and let iframe load
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+        // Focus on close button for accessibility
+        setTimeout(() => {
+            document.querySelector('.close-btn').focus();
+        }, 100);
+    }
+}
+
+function closeVideo() {
+    const modal = document.getElementById('videoModal');
+    const videoFrame = document.getElementById('videoFrame');
+    const videoContainer = document.querySelector('.video-container');
+    
+    modal.style.display = 'none';
+    videoFrame.src = '';
+    
+    // Reset video container to original iframe structure
+    videoContainer.innerHTML = '<iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>';
+    
+    // Re-enable body scroll
+    document.body.style.overflow = 'auto';
+}
+
+function convertSharePointUrlToEmbed(sharePointUrl) {
+    // Convert SharePoint sharing URL to embed format
+    try {
+        // Extract the unique ID from the SharePoint URL
+        const url = new URL(sharePointUrl);
+        
+        // Try to extract the resource ID from the URL
+        let resid = '';
+        if (url.pathname.includes('/:v:/')) {
+            // This is a video sharing URL
+            const pathSegments = url.pathname.split('/');
+            const vIndex = pathSegments.findIndex(segment => segment === ':v:');
+            if (vIndex >= 0 && vIndex < pathSegments.length - 1) {
+                resid = pathSegments[vIndex + 2]; // The ID should be two positions after ':v:'
+            }
+        }
+        
+        // If we couldn't extract the ID, try from the full URL
+        if (!resid) {
+            const match = sharePointUrl.match(/([A-Za-z0-9_-]{43})/);
+            if (match) {
+                resid = match[1];
+            }
+        }
+        
+        // Create embed URL for SharePoint video
+        if (resid) {
+            const embedUrl = `https://depagroupdepa.sharepoint.com/_layouts/15/embed.aspx?UniqueId=${resid}&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create`;
+            return embedUrl;
+        }
+        
+        // Fallback to original URL
+        return sharePointUrl;
+        
+    } catch (error) {
+        console.error('Error converting SharePoint URL:', error);
+        return sharePointUrl;
+    }
+}
+
+function showVideoInstructions(title, url) {
+    const videoContainer = document.querySelector('.video-container');
+    
+    // Show instructions instead of iframe
+    videoContainer.innerHTML = `
+        <div style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 400px;
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            text-align: center;
+            padding: 40px;
+        ">
+            <div style="
+                font-size: 48px;
+                margin-bottom: 20px;
+                color: #ff4444;
+            ">📹</div>
+            <h3 style="
+                color: #ffffff;
+                margin-bottom: 16px;
+                font-size: 18px;
+            ">SharePoint Video Access</h3>
+            <p style="
+                color: #cccccc;
+                margin-bottom: 24px;
+                line-height: 1.6;
+                max-width: 400px;
+                font-size: 14px;
+            ">
+                This video is hosted on SharePoint and requires authentication. 
+                Click the button below to open the video in a new tab where you can sign in if needed.
+            </p>
+            <button onclick="window.open('${url}', '_blank')" style="
+                background-color: #ff4444;
+                color: white;
+                border: none;
+                padding: 12px 24px;
+                border-radius: 6px;
+                font-weight: 500;
+                cursor: pointer;
+                font-size: 14px;
+                transition: background-color 0.2s ease;
+                margin-bottom: 12px;
+            " onmouseover="this.style.backgroundColor='#e63939'" 
+               onmouseout="this.style.backgroundColor='#ff4444'">
+                📺 Open Video in New Tab
+            </button>
+            <small style="
+                color: #888888;
+                font-size: 12px;
+            ">
+                You may need to sign in to access the video
+            </small>
+        </div>
+    `;
+}
+
+function initializeVideoModal() {
+    const modal = document.getElementById('videoModal');
+    
+    // Close modal when clicking outside
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeVideo();
+        }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.style.display !== 'none') {
+            closeVideo();
+        }
+    });
+}
 
 // Navigation functionality
 function initializeNavigation() {
@@ -20,13 +205,23 @@ function initializeNavigation() {
             // Add active class to clicked item
             this.classList.add('active');
             
+            // Get the title of the clicked item
+            const title = this.querySelector('.nav-title').textContent;
+            
+            // Open video for About section automatically
+            if (title === 'About') {
+                setTimeout(() => {
+                    openVideo('About');
+                }, 300);
+            }
+            
             // Smooth scroll to top of content area
             document.querySelector('.content').scrollIntoView({ 
                 behavior: 'smooth',
                 block: 'start'
             });
             
-            // Update content based on selection (you can expand this)
+            // Update content based on selection
             updateContentArea(this);
         });
         
@@ -160,7 +355,6 @@ function removeHighlights() {
 // Card interactions
 function initializeCardInteractions() {
     const toolCards = document.querySelectorAll('.tool-card');
-    const buttons = document.querySelectorAll('.btn-secondary');
     
     // Add hover effects and click handlers
     toolCards.forEach(card => {
@@ -172,26 +366,6 @@ function initializeCardInteractions() {
         card.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(0)';
             this.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.3)';
-        });
-    });
-    
-    // Button click effects
-    buttons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Create ripple effect
-            createRippleEffect(this, e);
-            
-            // Simulate action (you can replace with actual functionality)
-            this.textContent = 'Loading...';
-            this.disabled = true;
-            
-            setTimeout(() => {
-                this.textContent = 'Video Guide';
-                this.disabled = false;
-                showToast('Video guide will be available soon!');
-            }, 1000);
         });
     });
 }
@@ -260,19 +434,39 @@ function updateContentArea(navItem) {
     switch(title) {
         case 'About':
             contentHeader.textContent = 'About One Click Plugin';
-            contentDescription.textContent = 'Learn about the One Click Plugin and discover core functionality along with powerful application tools for enhanced productivity.';
+            contentDescription.textContent = 'Learn about the One Click Plugin and discover how it revolutionizes your Revit workflow with powerful automation tools.';
             break;
         case 'Licenses Manager':
             contentHeader.textContent = 'License Management';
-            contentDescription.textContent = 'Manage your plugin licenses with our efficient workflow system that supports individual and community licensing options.';
+            contentDescription.textContent = 'Manage your plugin licenses efficiently with our comprehensive licensing system that supports individual and team deployments.';
             break;
         case 'Openings Tools':
-            contentHeader.textContent = 'Opening Tools Documentation';
-            contentDescription.textContent = 'Automate the creation and modification of game openings with precision, speed, and advanced configuration options.';
+            contentHeader.textContent = 'Openings Tools Documentation';
+            contentDescription.textContent = 'Automate the creation and modification of openings in walls, floors, and ceilings with precision and speed.';
+            break;
+        case 'Standards Tools':
+            contentHeader.textContent = 'Standards Tools Documentation';
+            contentDescription.textContent = 'Ensure project consistency and compliance with comprehensive standard management and validation tools.';
+            break;
+        case 'Step 2 Tools':
+            contentHeader.textContent = 'Step 2 Tools Documentation';
+            contentDescription.textContent = 'Advanced workflow automation for the second phase of your modeling process with intelligent decision-making capabilities.';
+            break;
+        case 'Model Health Tools':
+            contentHeader.textContent = 'Model Health Tools Documentation';
+            contentDescription.textContent = 'Comprehensive model diagnostics and health monitoring to ensure optimal performance and reliability.';
+            break;
+        case 'Utilities Tools':
+            contentHeader.textContent = 'Utilities Tools Documentation';
+            contentDescription.textContent = 'A collection of powerful utility tools designed to enhance productivity and streamline common Revit tasks.';
+            break;
+        case 'Up Next':
+            contentHeader.textContent = 'Upcoming Features';
+            contentDescription.textContent = 'Discover the exciting new tools and features coming to the One Click Plugin in future releases.';
             break;
         default:
             contentHeader.textContent = 'One Click Plugin Documentation';
-            contentDescription.textContent = 'Comprehensive documentation for all plugin panels and tools. Select a specific panel from the left navigation to view detailed information, instructional videos, and usage guidelines.';
+            contentDescription.textContent = 'Comprehensive documentation for all plugin panels and tools. Select a specific panel from the navigation to view detailed information, instructional videos, and usage guidelines.';
     }
     
     // Add fade effect

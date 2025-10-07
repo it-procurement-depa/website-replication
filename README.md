@@ -20,6 +20,7 @@ Visit the live website: [Your GitHub Pages URL will go here]
 
 - **Responsive Design**: Fully responsive layout that works on desktop, tablet, and mobile devices
 - **Interactive Navigation**: Clickable sidebar navigation with active states
+- **Video Integration**: SharePoint video streaming with modal player
 - **Search Functionality**: Real-time search with content filtering and highlighting
 - **Smooth Animations**: Subtle animations and hover effects for better UX
 - **Accessibility**: Keyboard navigation support and proper focus management
@@ -94,6 +95,17 @@ git push origin main
 5. **Enable GitHub Pages** in repository settings
 
 ## 🔧 Customization
+
+### Video URLs
+Edit the SharePoint video URLs in `script.js` to link to your specific videos:
+
+```javascript
+const videoUrls = {
+    'About': 'https://your-sharepoint-domain.sharepoint.com/:v:/s/site/video-id',
+    'Licenses Manager': 'https://your-sharepoint-domain.sharepoint.com/:v:/s/site/video-id',
+    // Add more video URLs as needed
+};
+```
 
 ### Colors
 Edit the CSS variables in `style.css` to change the color scheme:
