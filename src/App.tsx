@@ -206,7 +206,13 @@ function App() {
                       <Button
                         key={item.id}
                         variant="ghost"
-                        onClick={() => setActiveSection(item.id)}
+                        onClick={() => {
+                          setActiveSection(item.id)
+                          // Show video immediately when About is selected
+                          if (item.id === 'about') {
+                            openVideo('About')
+                          }
+                        }}
                         className={`w-full justify-start h-auto p-3 ${
                           isActive 
                             ? 'bg-muted text-foreground' 
