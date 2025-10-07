@@ -97,6 +97,7 @@ function App() {
       title: 'About',
       features: '5 Features',
       description: 'Learn about the One Click Plugin and discover how it revolutionizes your Revit workflow with powerful automation tools.',
+      hasVideo: true,
       hasDocumentation: true
     },
     {
