@@ -1,18 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Click Plugin Documentation</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="/src/main.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-</body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">dopa</span>
+                <span class="logo-text">One Click Plugin</span>
+            </div>
+            <div class="search-container">
+                <input type="text" placeholder="Search tutorials, events, or tools..." class="search-input">
+                <button class="search-btn">🔍</button>
+            </div>
+            <nav class="nav">
+                <a href="#" class="nav-link">Plugin Documentation</a>
+                <span class="version">v0.1.23-01</span>
+            </nav>
+        </header>
 
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <div class="nav-section">
+                        <h3>Documentation</h3>
+                        <div class="nav-item active">
+                            <span class="nav-icon">📄</span>
+                            <div>
+                                <div class="nav-title">All Documentation</div>
+                                <div class="nav-subtitle">Browse complete documentation</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="nav-section">
+                        <div class="nav-item">
+                            <span class="nav-icon">ℹ️</span>
+                            <div>
+                                <div class="nav-title">About</div>
+                                <div class="nav-subtitle">Plugin overview and getting started</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="nav-section">
+                        <div class="nav-item">
+                            <span class="nav-icon">🔑</span>
+                            <div>
+                                <div class="nav-title">Licenses Manager</div>
+                                <div class="nav-subtitle">License management and activation</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="nav-section">
+                        <div class="nav-item">
+                            <span class="nav-icon">🔧</span>
+                            <div>
+                                <div class="nav-title">Openings Tools</div>
+                                <div class="nav-subtitle">Game opening and modification tools</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="nav-section">
+                        <div class="nav-item">
+                            <span class="nav-icon">📊</span>
+                            <div>
+                                <div class="nav-title">Standards Tools</div>
+                                <div class="nav-subtitle">Standard tool applications and workflows</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="nav-section">
+                        <div class="nav-item">
+                            <span class="nav-icon">⚡</span>
+                            <div>
+                                <div class="nav-title">Step 2 Tools</div>
+                                <div class="nav-subtitle">Advanced workflow step 2 applications</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="nav-section">
+                        <div class="nav-item">
+                            <span class="nav-icon">💊</span>
+                            <div>
+                                <div class="nav-title">Model Health Tools</div>
+                                <div class="nav-subtitle">Model monitoring and health tools</div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="content">
+                <div class="content-header">
+                    <h1>One Click Plugin Documentation</h1>
+                    <p class="content-description">
+                        Comprehensive documentation for all plugin panels and tools. Select a specific panel from the left navigation to view detailed information, instructional videos, and usage guidelines.
+                    </p>
+                </div>
+
+                <!-- Tool Categories Grid -->
+                <div class="tools-grid">
+                    <!-- About -->
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h3>About</h3>
+                            <span class="feature-count">5 Features</span>
+                        </div>
+                        <p>Learn about the One Click Plugin and discover core functionality along with powerful application tools.</p>
+                        <div class="tool-actions">
+                            <button class="btn-secondary">Video Guide</button>
+                        </div>
+                    </div>
+
+                    <!-- Licenses Manager -->
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h3>Licenses Manager</h3>
+                            <span class="feature-count">5 Features</span>
+                        </div>
+                        <p>Manage your plugin license with our efficient workflow license management system that supports individual and community licensing.</p>
+                        <div class="tool-actions">
+                            <button class="btn-secondary">Video Guide</button>
+                        </div>
+                    </div>
+
+                    <!-- Openings Tools -->
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h3>Openings Tools</h3>
+                            <span class="feature-count">5 Features</span>
+                        </div>
+                        <p>Automate the creation and modification of game openings with precision and speed.</p>
+                        <div class="tool-actions">
+                            <button class="btn-secondary">Video Guide</button>
+                        </div>
+                    </div>
+
+                    <!-- Standards Tools -->
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h3>Standards Tools</h3>
+                            <span class="feature-count">5 Features</span>
+                        </div>
+                        <p>Ensure your projects comply with industry standards using our comprehensive suite of validation tools.</p>
+                        <div class="tool-actions">
+                            <button class="btn-secondary">Video Guide</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 Tools -->
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h3>Step 2 Tools</h3>
+                            <span class="feature-count">5 Features</span>
+                        </div>
+                        <p>Advanced tools for the second phase of your modeling workflow, including decision-making support and automation.</p>
+                        <div class="tool-actions">
+                            <button class="btn-secondary">Video Guide</button>
+                        </div>
+                    </div>
+
+                    <!-- Model Health Tools -->
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h3>Model Health Tools</h3>
+                            <span class="feature-count">5 Features</span>
+                        </div>
+                        <p>Monitor and analyze your models with comprehensive health monitoring to ensure optimal performance and reliability.</p>
+                        <div class="tool-actions">
+                            <button class="btn-secondary">Video Guide</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
 </html>
