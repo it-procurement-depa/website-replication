@@ -2,12 +2,7 @@ import { useState } from 'react'
 import { 
   MagnifyingGlass, 
   ArrowSquareOut, 
-  GridFour,
-  Info,
-  CreditCard,
-  Wrench,
   ChartLineUp,
-  NumberTwo,
   Heart,
   Toolbox,
   ArrowRight
@@ -22,26 +17,26 @@ function App() {
       id: 'all-documentation',
       title: 'All Documentation',
       subtitle: 'Browse all available documentation',
-      icon: GridFour,
+      icon: '📄',
       isActive: true
     },
     {
       id: 'about',
       title: 'About',
       subtitle: 'Plugin overview and introduction',
-      icon: Info
+      icon: Heart
     },
     {
       id: 'licenses',
       title: 'Licenses Manager',
       subtitle: 'License management and activation',
-      icon: CreditCard
+      icon: ChartLineUp
     },
     {
       id: 'openings',
       title: 'Openings Tools',
       subtitle: 'Opening creation and modification tools',
-      icon: Wrench
+      icon: Toolbox
     },
     {
       id: 'standards',
@@ -53,7 +48,7 @@ function App() {
       id: 'step2',
       title: 'Step 2 Tools',
       subtitle: 'Advanced workflow step 2 tools',
-      icon: NumberTwo
+      icon: ArrowRight
     },
     {
       id: 'health',
@@ -68,9 +63,9 @@ function App() {
       icon: Toolbox
     },
     {
-      id: 'up-next',
+      id: 'next',
       title: 'Up Next',
-      subtitle: 'Upcoming features and tutorials',
+      subtitle: 'Upcoming features and tools',
       icon: ArrowRight
     }
   ]
@@ -80,14 +75,12 @@ function App() {
       title: 'About',
       features: '5 Features',
       description: 'Learn about the One Click Plugin and discover how it revolutionizes your Revit workflow with powerful automation tools.',
-      hasVideo: true,
       hasDocumentation: true
     },
     {
       title: 'Licenses Manager',
       features: '5 Features',
       description: 'Manage your plugin licenses efficiently with our comprehensive licensing system that supports individual and team deployments.',
-      hasVideo: true,
       hasDocumentation: true
     },
     {
@@ -160,41 +153,45 @@ function App() {
             </div>
           </div>
 
-          {/* Navigation */}
+          {/* Version Info */}
           <div className="flex items-center gap-4 text-sm">
             <span className="text-foreground">Plugin Documentation</span>
             <span className="text-muted-foreground">Version 2025.1.2</span>
           </div>
         </div>
       </header>
+
       <div className="flex">
         {/* Sidebar */}
         <aside className="w-80 bg-card border-r border-border h-[calc(100vh-73px)] overflow-y-auto">
           <div className="p-6">
             <h3 className="text-sm font-medium text-muted-foreground mb-4">Documentation</h3>
             
-            <nav className="space-y-1">
+            <nav className="space-y-2">
               {navigationItems.map((item) => {
                 const isActive = activeSection === item.id
-                
                 return (
                   <Button
                     key={item.id}
                     variant="ghost"
                     onClick={() => setActiveSection(item.id)}
-                    className={`w-full justify-start h-auto p-4 rounded-lg ${
+                    className={`w-full justify-start h-auto p-3 ${
                       isActive 
-                        ? 'bg-primary/10 text-foreground border border-primary/20' 
+                        ? 'bg-muted text-foreground' 
                         : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                     }`}
                   >
-                    <div className="flex items-start gap-3 w-full">
-                      <div className="flex-shrink-0 w-4 h-4 flex items-center justify-center mt-0.5">
-                        <item.icon className={`w-4 h-4 ${isActive ? 'text-primary' : 'text-muted-foreground'}`} />
+                    <div className="flex items-center gap-3 w-full">
+                      <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center">
+                        {typeof item.icon === 'string' ? (
+                          <span>{item.icon}</span>
+                        ) : (
+                          <item.icon />
+                        )}
                       </div>
                       <div className="flex-1 min-w-0 text-left">
-                        <div className={`font-medium text-sm ${isActive ? 'text-foreground' : ''}`}>{item.title}</div>
-                        <div className="text-xs text-muted-foreground mt-1 leading-relaxed">{item.subtitle}</div>
+                        <div className="font-medium text-sm">{item.title}</div>
+                        <div className="text-xs text-muted-foreground mt-1">{item.subtitle}</div>
                       </div>
                     </div>
                   </Button>
@@ -222,14 +219,14 @@ function App() {
                   {/* Card Header */}
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-2">
-                      {card.title === 'About' && <Info className="w-4 h-4" />}
-                      {card.title === 'Licenses Manager' && <CreditCard className="w-4 h-4" />}
-                      {card.title === 'Openings Tools' && <Wrench className="w-4 h-4" />}
-                      {card.title === 'Standards Tools' && <ChartLineUp className="w-4 h-4" />}
-                      {card.title === 'Step 2 Tools' && <NumberTwo className="w-4 h-4" />}
-                      {card.title === 'Model Health Tools' && <Heart className="w-4 h-4" />}
-                      {card.title === 'Utilities Tools' && <Toolbox className="w-4 h-4" />}
-                      {card.title === 'Up Next' && <ArrowRight className="w-4 h-4" />}
+                      {card.title === 'About' && <Heart />}
+                      {card.title === 'Licenses Manager' && <ChartLineUp />}
+                      {card.title === 'Openings Tools' && <Toolbox />}
+                      {card.title === 'Standards Tools' && <ChartLineUp />}
+                      {card.title === 'Step 2 Tools' && <ArrowRight />}
+                      {card.title === 'Model Health Tools' && <Heart />}
+                      {card.title === 'Utilities Tools' && <Toolbox />}
+                      {card.title === 'Up Next' && <ArrowRight />}
                       <h3 className="font-semibold">{card.title}</h3>
                     </div>
                     <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">
