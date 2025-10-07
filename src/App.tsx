@@ -10,6 +10,7 @@ import {
 } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { VideoPlayer } from '@/components/VideoPlayer'
+import { PanelPage } from '@/components/PanelPage'
 
 function App() {
   const [activeSection, setActiveSection] = useState('all-documentation')
@@ -25,6 +26,138 @@ function App() {
     'Model Health Tools': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
     'Utilities Tools': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
     'Up Next': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ'
+  }
+
+  // Panel data for individual pages
+  const panelData = {
+    'About': {
+      description: 'Learn about the One Click Plugin and discover how it revolutionizes your Revit workflow with powerful automation tools.',
+      overview: 'The One Click Plugin is a comprehensive toolkit designed to streamline your Revit workflow. With intuitive automation and smart tools, it reduces manual tasks and increases productivity across all phases of your project.',
+      keyFeatures: [
+        { title: 'Automated opening creation and modification', description: 'Streamline opening workflows' },
+        { title: 'Intelligent model health diagnostics', description: 'Monitor model performance' },
+        { title: 'Standards compliance verification', description: 'Ensure project consistency' },
+        { title: 'License management system', description: 'Manage team licenses efficiently' }
+      ],
+      benefits: [
+        { title: 'Reduce project delivery time by up to 40%', description: 'Faster project completion' },
+        { title: 'Minimize human errors in modeling', description: 'Improved accuracy' },
+        { title: 'Ensure consistent standards across teams', description: 'Better collaboration' },
+        { title: 'Streamline repetitive tasks', description: 'Enhanced productivity' }
+      ]
+    },
+    'Licenses Manager': {
+      description: 'Manage your plugin licenses efficiently with our comprehensive licensing system that supports individual and team deployments.',
+      overview: 'The Licenses Manager provides centralized control over plugin licensing, supporting both individual users and enterprise teams with flexible activation options and usage monitoring.',
+      keyFeatures: [
+        { title: 'Centralized license management', description: 'Control all licenses from one place' },
+        { title: 'Team license distribution', description: 'Assign licenses to team members' },
+        { title: 'Usage monitoring and reporting', description: 'Track license utilization' },
+        { title: 'Automatic license renewal', description: 'Seamless license updates' }
+      ],
+      benefits: [
+        { title: 'Simplified license administration', description: 'Easier management' },
+        { title: 'Cost-effective team licensing', description: 'Better value for teams' },
+        { title: 'Real-time usage insights', description: 'Data-driven decisions' },
+        { title: 'Reduced administrative overhead', description: 'More time for design' }
+      ]
+    },
+    'Openings Tools': {
+      description: 'Automate the creation and modification of openings in walls, floors, and ceilings with precision and speed.',
+      overview: 'The Openings Tools provide intelligent automation for creating, modifying, and managing openings in building elements, ensuring accuracy and consistency across your project.',
+      keyFeatures: [
+        { title: 'Automated opening placement', description: 'Smart positioning algorithms' },
+        { title: 'Batch opening operations', description: 'Process multiple openings' },
+        { title: 'Size optimization tools', description: 'Ensure proper dimensions' },
+        { title: 'Structural integration checks', description: 'Verify structural integrity' }
+      ],
+      benefits: [
+        { title: 'Faster opening creation process', description: 'Improved workflow speed' },
+        { title: 'Consistent opening standards', description: 'Maintained quality' },
+        { title: 'Reduced manual errors', description: 'Higher accuracy' },
+        { title: 'Streamlined coordination workflow', description: 'Better team coordination' }
+      ]
+    },
+    'Standards Tools': {
+      description: 'Ensure project consistency and compliance with comprehensive standard management and validation tools.',
+      overview: 'Standards Tools help maintain consistent project standards across all model elements, ensuring compliance with company guidelines and industry best practices.',
+      keyFeatures: [
+        { title: 'Standards validation engine', description: 'Automated compliance checking' },
+        { title: 'Custom standards configuration', description: 'Tailored to your needs' },
+        { title: 'Batch standards application', description: 'Apply to multiple elements' },
+        { title: 'Standards reporting tools', description: 'Track compliance status' }
+      ],
+      benefits: [
+        { title: 'Consistent project standards', description: 'Unified quality' },
+        { title: 'Reduced review time', description: 'Faster approvals' },
+        { title: 'Improved quality control', description: 'Better outcomes' },
+        { title: 'Streamlined collaboration', description: 'Team alignment' }
+      ]
+    },
+    'Step 2 Tools': {
+      description: 'Advanced workflow automation for the second phase of your modeling process with intelligent decision-making capabilities.',
+      overview: 'Step 2 Tools provide advanced automation for complex modeling workflows, featuring intelligent decision-making capabilities that adapt to your project requirements.',
+      keyFeatures: [
+        { title: 'Intelligent workflow automation', description: 'Smart process management' },
+        { title: 'Advanced decision algorithms', description: 'Adaptive processing' },
+        { title: 'Complex element coordination', description: 'Multi-system integration' },
+        { title: 'Performance optimization', description: 'Enhanced efficiency' }
+      ],
+      benefits: [
+        { title: 'Accelerated modeling workflows', description: 'Faster completion' },
+        { title: 'Intelligent process automation', description: 'Smarter decisions' },
+        { title: 'Reduced complexity management', description: 'Simplified workflows' },
+        { title: 'Enhanced project coordination', description: 'Better integration' }
+      ]
+    },
+    'Model Health Tools': {
+      description: 'Comprehensive model diagnostics and health monitoring to ensure optimal performance and reliability.',
+      overview: 'Model Health Tools provide comprehensive diagnostics and monitoring capabilities to maintain optimal model performance, identify issues early, and ensure long-term reliability.',
+      keyFeatures: [
+        { title: 'Real-time health monitoring', description: 'Continuous performance tracking' },
+        { title: 'Performance optimization suggestions', description: 'Actionable recommendations' },
+        { title: 'Issue detection and reporting', description: 'Early problem identification' },
+        { title: 'Model cleanup automation', description: 'Automated maintenance' }
+      ],
+      benefits: [
+        { title: 'Improved model performance', description: 'Faster operation' },
+        { title: 'Proactive issue resolution', description: 'Prevent problems' },
+        { title: 'Reduced file corruption risk', description: 'Better reliability' },
+        { title: 'Enhanced stability and speed', description: 'Optimal performance' }
+      ]
+    },
+    'Utilities Tools': {
+      description: 'A collection of powerful utility tools designed to enhance productivity and streamline common Revit tasks.',
+      overview: 'Utilities Tools offer a comprehensive collection of productivity enhancers and task automation features designed to streamline common Revit operations and improve overall efficiency.',
+      keyFeatures: [
+        { title: 'Batch processing capabilities', description: 'Handle multiple operations' },
+        { title: 'Custom automation scripts', description: 'Tailored solutions' },
+        { title: 'Data import/export tools', description: 'Flexible data handling' },
+        { title: 'Productivity enhancement features', description: 'Improved efficiency' }
+      ],
+      benefits: [
+        { title: 'Streamlined repetitive tasks', description: 'Time savings' },
+        { title: 'Enhanced workflow efficiency', description: 'Better productivity' },
+        { title: 'Flexible automation options', description: 'Customizable solutions' },
+        { title: 'Improved data management', description: 'Better organization' }
+      ]
+    },
+    'Up Next': {
+      description: 'Discover the exciting new tools and features coming to the One Click Plugin in future releases.',
+      overview: 'Up Next showcases the upcoming features and tools planned for future releases of the One Click Plugin, providing insight into the continuous evolution and enhancement of the platform.',
+      keyFeatures: [
+        { title: 'Advanced AI integration', description: 'Machine learning capabilities' },
+        { title: 'Cloud-based collaboration', description: 'Remote team features' },
+        { title: 'Enhanced reporting tools', description: 'Advanced analytics' },
+        { title: 'Mobile companion app', description: 'On-the-go access' }
+      ],
+      benefits: [
+        { title: 'Cutting-edge technology adoption', description: 'Stay ahead' },
+        { title: 'Improved collaboration features', description: 'Better teamwork' },
+        { title: 'Enhanced mobile workflows', description: 'Flexible access' },
+        { title: 'Future-ready capabilities', description: 'Long-term value' }
+      ]
+    }
   }
 
   const openVideo = (title: string) => {
@@ -209,10 +342,6 @@ function App() {
                         variant="ghost"
                         onClick={() => {
                           setActiveSection(item.id)
-                          // Show video immediately when About is selected
-                          if (item.id === 'about') {
-                            openVideo('About')
-                          }
                         }}
                         className={`w-full justify-start h-auto p-3 ${
                           isActive 
@@ -243,64 +372,88 @@ function App() {
             {/* Main Content */}
             <main className="flex-1 p-8">
               <div className="max-w-6xl">
-                {/* Header */}
-                <div className="mb-8">
-                  <h1 className="text-3xl font-bold mb-4">One Click Plugin Documentation</h1>
-                  <p className="text-muted-foreground text-lg leading-relaxed">
-                    Comprehensive documentation for all plugin panels and tools. Select a specific panel from the navigation to view detailed information, instructional videos, and usage guidelines.
-                  </p>
-                </div>
-
-                {/* Tools Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {toolCards.map((card, index) => (
-                    <div key={index} className="bg-card border border-border rounded-lg p-6 hover:border-muted-foreground/20 transition-colors">
-                      {/* Card Header */}
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="flex items-center gap-2">
-                          {card.title === 'About' && <Heart />}
-                          {card.title === 'Licenses Manager' && <ChartLineUp />}
-                          {card.title === 'Openings Tools' && <Toolbox />}
-                          {card.title === 'Standards Tools' && <ChartLineUp />}
-                          {card.title === 'Step 2 Tools' && <ArrowRight />}
-                          {card.title === 'Model Health Tools' && <Heart />}
-                          {card.title === 'Utilities Tools' && <Toolbox />}
-                          {card.title === 'Up Next' && <ArrowRight />}
-                          <h3 className="font-semibold">{card.title}</h3>
-                        </div>
-                        <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">
-                          {card.features}
-                        </span>
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
-                        {card.description}
+                {activeSection === 'all-documentation' ? (
+                  <>
+                    {/* Header */}
+                    <div className="mb-8">
+                      <h1 className="text-3xl font-bold mb-4">One Click Plugin Documentation</h1>
+                      <p className="text-muted-foreground text-lg leading-relaxed">
+                        Comprehensive documentation for all plugin panels and tools. Select a specific panel from the navigation to view detailed information, instructional videos, and usage guidelines.
                       </p>
-
-                      {/* Actions */}
-                      <div className="flex items-center gap-3">
-                        {card.hasVideo && (
-                          <Button 
-                            variant="ghost" 
-                            size="sm" 
-                            onClick={() => openVideo(card.title)}
-                            className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground h-7 px-2"
-                          >
-                            <Play className="w-3 h-3" />
-                            Video Guide
-                          </Button>
-                        )}
-                        {card.hasDocumentation && (
-                          <Button variant="ghost" size="sm" className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground ml-auto h-7 px-2">
-                            <ArrowSquareOut className="w-3 h-3" />
-                            View Documentation
-                          </Button>
-                        )}
-                      </div>
                     </div>
-                  ))}
-                </div>
+
+                    {/* Tools Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {toolCards.map((card, index) => (
+                        <div key={index} className="bg-card border border-border rounded-lg p-6 hover:border-muted-foreground/20 transition-colors">
+                          {/* Card Header */}
+                          <div className="flex items-start justify-between mb-4">
+                            <div className="flex items-center gap-2">
+                              {card.title === 'About' && <Heart />}
+                              {card.title === 'Licenses Manager' && <ChartLineUp />}
+                              {card.title === 'Openings Tools' && <Toolbox />}
+                              {card.title === 'Standards Tools' && <ChartLineUp />}
+                              {card.title === 'Step 2 Tools' && <ArrowRight />}
+                              {card.title === 'Model Health Tools' && <Heart />}
+                              {card.title === 'Utilities Tools' && <Toolbox />}
+                              {card.title === 'Up Next' && <ArrowRight />}
+                              <h3 className="font-semibold">{card.title}</h3>
+                            </div>
+                            <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">
+                              {card.features}
+                            </span>
+                          </div>
+
+                          {/* Description */}
+                          <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
+                            {card.description}
+                          </p>
+
+                          {/* Actions */}
+                          <div className="flex items-center gap-3">
+                            {card.hasVideo && (
+                              <Button 
+                                variant="ghost" 
+                                size="sm" 
+                                onClick={() => openVideo(card.title)}
+                                className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground h-7 px-2"
+                              >
+                                <Play className="w-3 h-3" />
+                                Video Guide
+                              </Button>
+                            )}
+                            {card.hasDocumentation && (
+                              <Button variant="ghost" size="sm" className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground ml-auto h-7 px-2">
+                                <ArrowSquareOut className="w-3 h-3" />
+                                View Documentation
+                              </Button>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  // Individual Panel Pages
+                  (() => {
+                    const panelKey = navigationItems.find(item => item.id === activeSection)?.title
+                    const data = panelKey ? panelData[panelKey as keyof typeof panelData] : null
+                    
+                    if (!data || !panelKey) return null
+                    
+                    return (
+                      <PanelPage
+                        title={panelKey}
+                        description={data.description}
+                        videoUrl={videoUrls[panelKey as keyof typeof videoUrls]}
+                        onPlayVideo={() => openVideo(panelKey)}
+                        overview={data.overview}
+                        keyFeatures={data.keyFeatures}
+                        benefits={data.benefits}
+                      />
+                    )
+                  })()
+                )}
               </div>
             </main>
           </div>
