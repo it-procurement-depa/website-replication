@@ -19,16 +19,16 @@ function App() {
   const [activeSection, setActiveSection] = useState('all-documentation')
   const [currentVideo, setCurrentVideo] = useState<{ title: string; url: string } | null>(null)
 
-  // YouTube video URLs for each panel - these would be replaced with actual YouTube URLs
+  // SharePoint video URLs for each panel
   const videoUrls = {
-    'About': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', // Example YouTube URL
-    'Licenses Manager': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    'Openings Tools': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    'Standards Tools': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    'Step 2 Tools': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    'Model Health Tools': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    'Utilities Tools': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    'Up Next': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+    'About': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
+    'Licenses Manager': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
+    'Openings Tools': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
+    'Standards Tools': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
+    'Step 2 Tools': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
+    'Model Health Tools': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
+    'Utilities Tools': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
+    'Up Next': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ'
   }
 
   // Panel data for individual pages
