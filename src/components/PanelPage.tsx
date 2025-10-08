@@ -71,8 +71,7 @@ export function PanelPage({
                 </div>
                 <div>
                   <p className="text-muted-foreground mb-4">
-                    الفيديو غير متاح<br />
-                    هذا الفيديو خاص
+                    Click the button below to watch the instructional video for this tool
                   </p>
                   <Button
                     onClick={onPlayVideo}
