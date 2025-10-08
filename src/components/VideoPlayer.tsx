@@ -4,59 +4,43 @@ import { Button } from '@/components/ui/button'
 
 interface VideoPlayerProps {
   title: string
-  sharePointUrl: string
+  youtubeUrl: string
   onClose: () => void
 }
 
-export function VideoPlayer({ title, sharePointUrl, onClose }: VideoPlayerProps) {
+export function VideoPlayer({ title, youtubeUrl, onClose }: VideoPlayerProps) {
   const [isLoading, setIsLoading] = useState(true)
   const [embedError, setEmbedError] = useState(false)
-  const [retryCount, setRetryCount] = useState(0)
 
-  // Convert SharePoint share link to embeddable URL
-  const getEmbedUrl = (url: string) => {
+  // Convert YouTube URL to embeddable format
+  const getYouTubeEmbedUrl = (url: string) => {
     try {
-      // Method 1: Try to convert to direct embed URL
-      if (url.includes('sharepoint.com')) {
-        // Extract base URL and attempt multiple embed formats
-        const baseUrl = url.split('/:v:')[0]
-        const fileIdMatch = url.match(/[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}/)
-        
-        if (fileIdMatch) {
-          const fileId = fileIdMatch[0]
-          // Try Stream embed format
-          return `${baseUrl}/_layouts/15/embed.aspx?UniqueId=${fileId}&access_token=&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D`
-        }
+      // Handle different YouTube URL formats
+      let videoId = ''
+      
+      if (url.includes('youtube.com/watch?v=')) {
+        videoId = url.split('v=')[1].split('&')[0]
+      } else if (url.includes('youtu.be/')) {
+        videoId = url.split('youtu.be/')[1].split('?')[0]
+      } else if (url.includes('youtube.com/embed/')) {
+        videoId = url.split('embed/')[1].split('?')[0]
       }
       
-      // Method 2: Add embed parameters to existing URL
-      const separator = url.includes('?') ? '&' : '?'
-      return `${url}${separator}embed=true&nav=false&file=&action=embedview`
+      if (videoId) {
+        return `https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0&modestbranding=1`
+      }
+      
+      return url
     } catch {
       return url
     }
   }
 
-  const extractFileId = (url: string) => {
-    // Extract various ID formats from SharePoint URL
-    const guidMatch = url.match(/[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}/)
-    if (guidMatch) return guidMatch[0]
-    
-    const idMatch = url.match(/[a-zA-Z0-9_-]{22,}/)
-    return idMatch ? idMatch[0] : ''
-  }
-
-  const embedUrl = getEmbedUrl(sharePointUrl)
+  const embedUrl = getYouTubeEmbedUrl(youtubeUrl)
 
   const handleIframeError = () => {
     setEmbedError(true)
     setIsLoading(false)
-  }
-
-  const handleRetry = () => {
-    setRetryCount(prev => prev + 1)
-    setEmbedError(false)
-    setIsLoading(true)
   }
 
   return (
@@ -115,24 +99,17 @@ export function VideoPlayer({ title, sharePointUrl, onClose }: VideoPlayerProps)
                       <Play className="w-8 h-8 text-primary" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold mb-2">Video Embed Restricted</h3>
+                      <h3 className="text-lg font-semibold mb-2">Video Loading Error</h3>
                       <p className="text-muted-foreground mb-4">
-                        This SharePoint video cannot be embedded directly due to security settings.
+                        Unable to load the video. Please try watching it directly on YouTube.
                       </p>
                       <div className="flex gap-3">
                         <Button
-                          onClick={() => window.open(sharePointUrl, '_blank')}
+                          onClick={() => window.open(youtubeUrl, '_blank')}
                           className="flex items-center gap-2"
                         >
                           <Play className="w-4 h-4" />
-                          Watch in SharePoint
-                        </Button>
-                        <Button
-                          variant="outline"
-                          onClick={handleRetry}
-                          className="flex items-center gap-2"
-                        >
-                          Try Again
+                          Watch on YouTube
                         </Button>
                       </div>
                     </div>
@@ -142,30 +119,28 @@ export function VideoPlayer({ title, sharePointUrl, onClose }: VideoPlayerProps)
               
               {!embedError && (
                 <iframe
-                  key={retryCount} // Force re-render on retry
                   src={embedUrl}
                   className="w-full h-full"
                   frameBorder="0"
                   allowFullScreen
-                  allow="autoplay; encrypted-media; picture-in-picture"
-                  sandbox="allow-scripts allow-same-origin allow-presentation allow-forms"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   onLoad={() => setIsLoading(false)}
                   onError={handleIframeError}
                   title={`${title} Video Tutorial`}
                 />
               )}
               
-              {/* Enhanced fallback controls */}
+              {/* YouTube link overlay */}
               {!isLoading && !embedError && (
                 <div className="absolute top-4 right-4 flex gap-2">
                   <Button
                     variant="secondary"
                     size="sm"
-                    onClick={() => window.open(sharePointUrl, '_blank')}
+                    onClick={() => window.open(youtubeUrl, '_blank')}
                     className="flex items-center gap-2 bg-black/50 hover:bg-black/70 text-white border-white/20"
                   >
                     <Play className="w-4 h-4" />
-                    Open Original
+                    Watch on YouTube
                   </Button>
                 </div>
               )}
@@ -181,33 +156,23 @@ export function VideoPlayer({ title, sharePointUrl, onClose }: VideoPlayerProps)
               
               {embedError && (
                 <div className="bg-muted/50 border border-border rounded-lg p-4 mb-4">
-                  <h4 className="font-medium mb-2">Viewing Options:</h4>
+                  <h4 className="font-medium mb-2">Video Viewing:</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Click "Watch in SharePoint" to open the video in a new tab</li>
-                    <li>• Use your organization's SharePoint credentials to access the content</li>
-                    <li>• Videos may require authentication depending on your access level</li>
+                    <li>• Click "Watch on YouTube" to open the video in a new tab</li>
+                    <li>• Videos are hosted on YouTube for better accessibility</li>
+                    <li>• No special authentication required</li>
                   </ul>
                 </div>
               )}
               
               <div className="flex items-center gap-4">
                 <Button
-                  onClick={() => window.open(sharePointUrl, '_blank')}
+                  onClick={() => window.open(youtubeUrl, '_blank')}
                   className="flex items-center gap-2"
                 >
                   <Play className="w-4 h-4" />
-                  Watch in SharePoint
+                  Watch on YouTube
                 </Button>
-                
-                {embedError && (
-                  <Button
-                    variant="outline"
-                    onClick={handleRetry}
-                    className="flex items-center gap-2"
-                  >
-                    Try Embed Again
-                  </Button>
-                )}
                 
                 <Button
                   variant="outline"

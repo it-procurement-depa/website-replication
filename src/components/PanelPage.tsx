@@ -14,21 +14,23 @@ interface Benefit {
 interface PanelPageProps {
   title: string
   description: string
-  videoUrl: string
+  youtubeUrl: string
   onPlayVideo: () => void
   overview: string
   keyFeatures: Feature[]
   benefits: Benefit[]
+  instructions: string[]
 }
 
 export function PanelPage({ 
   title, 
   description, 
-  videoUrl, 
+  youtubeUrl, 
   onPlayVideo, 
   overview, 
   keyFeatures, 
-  benefits 
+  benefits,
+  instructions 
 }: PanelPageProps) {
   return (
     <div className="max-w-4xl">
@@ -95,13 +97,37 @@ export function PanelPage({
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => window.open(videoUrl, '_blank')}
+                onClick={() => window.open(youtubeUrl, '_blank')}
                 className="flex items-center gap-2"
               >
                 <ArrowSquareOut className="w-4 h-4" />
                 Watch on YouTube
               </Button>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Usage Instructions Section */}
+      <div className="mb-8">
+        <div className="flex items-center gap-2 mb-4">
+          <div className="w-5 h-5 bg-muted rounded-full flex items-center justify-center text-xs">
+            📋
+          </div>
+          <h2 className="text-xl font-semibold">Usage Instructions</h2>
+        </div>
+        
+        <div className="bg-card border border-border rounded-lg p-6">
+          <h3 className="text-lg font-medium mb-4">How to Use {title}</h3>
+          <div className="space-y-3">
+            {instructions.map((instruction, index) => (
+              <div key={index} className="flex items-start gap-3">
+                <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0 mt-0.5">
+                  {index + 1}
+                </div>
+                <p className="text-muted-foreground leading-relaxed">{instruction}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>

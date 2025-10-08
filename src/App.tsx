@@ -16,16 +16,16 @@ function App() {
   const [activeSection, setActiveSection] = useState('all-documentation')
   const [currentVideo, setCurrentVideo] = useState<{ title: string; url: string } | null>(null)
 
-  // SharePoint video URLs for each panel
+  // YouTube video URLs for each panel - these would be replaced with actual YouTube URLs
   const videoUrls = {
-    'About': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
-    'Licenses Manager': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
-    'Openings Tools': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
-    'Standards Tools': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
-    'Step 2 Tools': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
-    'Model Health Tools': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
-    'Utilities Tools': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ',
-    'Up Next': 'https://depagroupdepa.sharepoint.com/:v:/s/Learning/EfKpkTQymRRAslaIb4XPvZsBuH_I04fGiR6Y3wB2R0WHEg?e=llIEpQ'
+    'About': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', // Example YouTube URL
+    'Licenses Manager': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    'Openings Tools': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    'Standards Tools': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    'Step 2 Tools': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    'Model Health Tools': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    'Utilities Tools': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    'Up Next': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   }
 
   // Panel data for individual pages
@@ -33,6 +33,13 @@ function App() {
     'About': {
       description: 'Learn about the One Click Plugin and discover how it revolutionizes your Revit workflow with powerful automation tools.',
       overview: 'The One Click Plugin is a comprehensive toolkit designed to streamline your Revit workflow. With intuitive automation and smart tools, it reduces manual tasks and increases productivity across all phases of your project.',
+      instructions: [
+        'Launch Revit and open your project file',
+        'Navigate to the Add-ins tab in the Revit ribbon',
+        'Locate the One Click Plugin panel and click to expand it',
+        'Browse through the available tools and documentation',
+        'Watch the video tutorials to understand each feature'
+      ],
       keyFeatures: [
         { title: 'Automated opening creation and modification', description: 'Streamline opening workflows' },
         { title: 'Intelligent model health diagnostics', description: 'Monitor model performance' },
@@ -49,6 +56,13 @@ function App() {
     'Licenses Manager': {
       description: 'Manage your plugin licenses efficiently with our comprehensive licensing system that supports individual and team deployments.',
       overview: 'The Licenses Manager provides centralized control over plugin licensing, supporting both individual users and enterprise teams with flexible activation options and usage monitoring.',
+      instructions: [
+        'Open the Licenses Manager from the One Click Plugin panel',
+        'Enter your license key in the activation field',
+        'Click "Activate License" to validate your credentials',
+        'For team licenses, assign users through the team management interface',
+        'Monitor license usage and renewal dates in the dashboard'
+      ],
       keyFeatures: [
         { title: 'Centralized license management', description: 'Control all licenses from one place' },
         { title: 'Team license distribution', description: 'Assign licenses to team members' },
@@ -65,6 +79,13 @@ function App() {
     'Openings Tools': {
       description: 'Automate the creation and modification of openings in walls, floors, and ceilings with precision and speed.',
       overview: 'The Openings Tools provide intelligent automation for creating, modifying, and managing openings in building elements, ensuring accuracy and consistency across your project.',
+      instructions: [
+        'Select the wall, floor, or ceiling where you want to create an opening',
+        'Launch the Openings Tools from the plugin panel',
+        'Choose the opening type (door, window, generic) from the dropdown',
+        'Set the dimensions and position using the input fields',
+        'Click "Create Opening" to automatically generate the opening with proper parameters'
+      ],
       keyFeatures: [
         { title: 'Automated opening placement', description: 'Smart positioning algorithms' },
         { title: 'Batch opening operations', description: 'Process multiple openings' },
@@ -81,6 +102,13 @@ function App() {
     'Standards Tools': {
       description: 'Ensure project consistency and compliance with comprehensive standard management and validation tools.',
       overview: 'Standards Tools help maintain consistent project standards across all model elements, ensuring compliance with company guidelines and industry best practices.',
+      instructions: [
+        'Access Standards Tools from the main plugin interface',
+        'Load your company or project standards template',
+        'Run the standards validation check on selected elements',
+        'Review the compliance report highlighting any issues',
+        'Apply automatic corrections or manually adjust non-compliant elements'
+      ],
       keyFeatures: [
         { title: 'Standards validation engine', description: 'Automated compliance checking' },
         { title: 'Custom standards configuration', description: 'Tailored to your needs' },
@@ -97,6 +125,13 @@ function App() {
     'Step 2 Tools': {
       description: 'Advanced workflow automation for the second phase of your modeling process with intelligent decision-making capabilities.',
       overview: 'Step 2 Tools provide advanced automation for complex modeling workflows, featuring intelligent decision-making capabilities that adapt to your project requirements.',
+      instructions: [
+        'Complete the initial model setup and first phase documentation',
+        'Launch Step 2 Tools from the advanced workflows section',
+        'Configure the automation parameters based on your project type',
+        'Run the automated workflow processes in the recommended sequence',
+        'Review and approve the suggested changes before applying them to the model'
+      ],
       keyFeatures: [
         { title: 'Intelligent workflow automation', description: 'Smart process management' },
         { title: 'Advanced decision algorithms', description: 'Adaptive processing' },
@@ -113,6 +148,13 @@ function App() {
     'Model Health Tools': {
       description: 'Comprehensive model diagnostics and health monitoring to ensure optimal performance and reliability.',
       overview: 'Model Health Tools provide comprehensive diagnostics and monitoring capabilities to maintain optimal model performance, identify issues early, and ensure long-term reliability.',
+      instructions: [
+        'Open Model Health Tools from the utilities section',
+        'Run a full model health scan to identify potential issues',
+        'Review the detailed health report and performance metrics',
+        'Address critical issues using the automated fix suggestions',
+        'Schedule regular health checks to maintain optimal model performance'
+      ],
       keyFeatures: [
         { title: 'Real-time health monitoring', description: 'Continuous performance tracking' },
         { title: 'Performance optimization suggestions', description: 'Actionable recommendations' },
@@ -129,6 +171,13 @@ function App() {
     'Utilities Tools': {
       description: 'A collection of powerful utility tools designed to enhance productivity and streamline common Revit tasks.',
       overview: 'Utilities Tools offer a comprehensive collection of productivity enhancers and task automation features designed to streamline common Revit operations and improve overall efficiency.',
+      instructions: [
+        'Access the Utilities Tools collection from the main menu',
+        'Select the specific utility tool needed for your current task',
+        'Configure the tool parameters according to your project requirements',
+        'Execute the utility function on your selected elements or entire model',
+        'Review the results and apply any additional optimizations as needed'
+      ],
       keyFeatures: [
         { title: 'Batch processing capabilities', description: 'Handle multiple operations' },
         { title: 'Custom automation scripts', description: 'Tailored solutions' },
@@ -145,6 +194,13 @@ function App() {
     'Up Next': {
       description: 'Discover the exciting new tools and features coming to the One Click Plugin in future releases.',
       overview: 'Up Next showcases the upcoming features and tools planned for future releases of the One Click Plugin, providing insight into the continuous evolution and enhancement of the platform.',
+      instructions: [
+        'Browse the upcoming features roadmap in the Up Next section',
+        'Review planned features and their expected release dates',
+        'Provide feedback on proposed features through the feedback system',
+        'Sign up for beta testing programs for early access to new tools',
+        'Stay updated with release notifications and feature announcements'
+      ],
       keyFeatures: [
         { title: 'Advanced AI integration', description: 'Machine learning capabilities' },
         { title: 'Cloud-based collaboration', description: 'Remote team features' },
@@ -288,7 +344,7 @@ function App() {
       {currentVideo && (
         <VideoPlayer
           title={currentVideo.title}
-          sharePointUrl={currentVideo.url}
+          youtubeUrl={currentVideo.url}
           onClose={() => setCurrentVideo(null)}
         />
       )}
@@ -445,11 +501,12 @@ function App() {
                       <PanelPage
                         title={panelKey}
                         description={data.description}
-                        videoUrl={videoUrls[panelKey as keyof typeof videoUrls]}
+                        youtubeUrl={videoUrls[panelKey as keyof typeof videoUrls]}
                         onPlayVideo={() => openVideo(panelKey)}
                         overview={data.overview}
                         keyFeatures={data.keyFeatures}
                         benefits={data.benefits}
+                        instructions={data.instructions}
                       />
                     )
                   })()
