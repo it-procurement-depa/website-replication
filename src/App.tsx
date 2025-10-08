@@ -523,7 +523,7 @@ function App() {
                         }}
                         className={`w-full justify-start h-auto p-3 ${
                           isActive 
-                            ? 'bg-primary text-primary-foreground border-l-4 border-primary-foreground' 
+                            ? 'bg-[#ffd6d1] text-foreground border-l-4 border-primary' 
                             : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                         }`}
                       >
