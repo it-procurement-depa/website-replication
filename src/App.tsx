@@ -219,11 +219,26 @@ function App() {
     }
   }
 
-  const openVideo = (title: string) => {
-    const url = videoUrls[title as keyof typeof videoUrls]
+  const openVideo = (panelKey: string) => {
+    const url = videoUrls[panelKey as keyof typeof videoUrls]
     if (url) {
-      setCurrentVideo({ title, url })
+      setCurrentVideo({ title: panelKey, url })
     }
+  }
+
+  // Map card titles to navigation IDs
+  const getNavigationIdFromTitle = (title: string): string => {
+    const titleToIdMap: Record<string, string> = {
+      'About': 'about',
+      'Licenses Manager': 'licenses',
+      'Openings Tools': 'openings',
+      'Standards Tools': 'standards',
+      'Step 2 Tools': 'step2',
+      'Model Health Tools': 'health',
+      'Utilities Tools': 'utilities',
+      'Up Next': 'next'
+    }
+    return titleToIdMap[title] || ''
   }
 
   const navigationItems = [
@@ -586,7 +601,12 @@ function App() {
                               </Button>
                             )}
                             {card.hasDocumentation && (
-                              <Button variant="ghost" size="sm" className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground ml-auto h-7 px-2">
+                              <Button 
+                                variant="ghost" 
+                                size="sm" 
+                                onClick={() => setActiveSection(getNavigationIdFromTitle(card.title))}
+                                className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground ml-auto h-7 px-2"
+                              >
                                 <ArrowSquareOut className="w-3 h-3" />
                                 View Documentation
                               </Button>
@@ -599,16 +619,29 @@ function App() {
                 ) : (
                   // Individual Panel Pages
                   (() => {
-                    const panelKey = navigationItems.find(item => item.id === activeSection)?.title
+                    // Map navigation IDs to panel data keys
+                    const navigationToPanelMap: Record<string, string> = {
+                      'about': 'About',
+                      'licenses': 'Licenses Manager',
+                      'openings': 'Openings Tools',
+                      'standards': 'Standards Tools',
+                      'step2': 'Step 2 Tools',
+                      'health': 'Model Health Tools',
+                      'utilities': 'Utilities Tools',
+                      'next': 'Up Next'
+                    }
+                    
+                    const panelKey = navigationToPanelMap[activeSection]
+                    const navItem = navigationItems.find(item => item.id === activeSection)
                     const data = panelKey ? panelData[panelKey as keyof typeof panelData] : null
                     
-                    if (!data || !panelKey) return null
+                    if (!data || !panelKey || !navItem) return null
                     
                     // Special handling for "Up Next" section
                     if (panelKey === 'Up Next') {
                       return (
                         <UpNextPage
-                          title={panelKey}
+                          title={navItem.title}
                           description={data.description}
                           youtubeUrl={videoUrls[panelKey as keyof typeof videoUrls]}
                           onPlayVideo={() => openVideo(panelKey)}
@@ -620,7 +653,7 @@ function App() {
                     
                     return (
                       <PanelPage
-                        title={panelKey}
+                        title={navItem.title}
                         description={data.description}
                         youtubeUrl={videoUrls[panelKey as keyof typeof videoUrls]}
                         onPlayVideo={() => openVideo(panelKey)}
