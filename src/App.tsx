@@ -526,6 +526,7 @@ function App() {
                             ? 'bg-[#ffd6d1] text-foreground border-l-4 border-primary' 
                             : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                         }`}
+                        style={isActive ? { backgroundColor: '#ffd6d1' } : {}}
                       >
                         <div className="flex items-center gap-3 w-full">
                           <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center">
