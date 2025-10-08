@@ -100,7 +100,7 @@ export function PanelPage({
                 className="flex items-center gap-2"
               >
                 <ArrowSquareOut className="w-4 h-4" />
-                Watch on YouTube
+                Open in SharePoint
               </Button>
             </div>
           </div>
