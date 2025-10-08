@@ -11,6 +11,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { VideoPlayer } from '@/components/VideoPlayer'
 import { PanelPage } from '@/components/PanelPage'
+import { UpNextPage } from '@/components/UpNextPage'
 
 function App() {
   const [activeSection, setActiveSection] = useState('all-documentation')
@@ -339,6 +340,74 @@ function App() {
     }
   ]
 
+  // Future project cards for the "Up Next" section
+  const futureProjectCards = [
+    {
+      title: 'Wall Fixation Tools',
+      category: 'Fixation Systems',
+      description: 'Create comprehensive fixation systems for walls with automated placement and sizing.',
+      status: 'IN DEVELOPMENT',
+      quarter: 'Q2 2024',
+      statusColor: 'bg-yellow-500'
+    },
+    {
+      title: 'Ceiling Fixation Tools', 
+      category: 'Fixation Systems',
+      description: 'Complete fixation system for standard ceilings with intelligent anchor placement.',
+      status: 'PLANNED',
+      quarter: 'Q3 2024', 
+      statusColor: 'bg-blue-500'
+    },
+    {
+      title: 'Ceiling Curved Fixation Tools',
+      category: 'Fixation Systems', 
+      description: 'Specialized tools for creating fixation systems on curved ceiling surfaces.',
+      status: 'PLANNED',
+      quarter: 'Q3 2024',
+      statusColor: 'bg-blue-500'
+    },
+    {
+      title: 'Floor Fixation Tools',
+      category: 'Fixation Systems',
+      description: 'Comprehensive floor fixation system with support for various flooring types.',
+      status: 'PLANNED', 
+      quarter: 'Q4 2024',
+      statusColor: 'bg-blue-500'
+    },
+    {
+      title: 'Parts Tools',
+      category: 'Modeling Tools',
+      description: 'Advanced parts creation with automatic grooves for tiles and enhanced detailing.',
+      status: 'TESTING',
+      quarter: 'Q1 2024',
+      statusColor: 'bg-green-500'
+    },
+    {
+      title: 'Shop Drawings',
+      category: 'Documentation',
+      description: 'Automated shop drawing generation with intelligent dimensions and tags.',
+      status: 'IN DEVELOPMENT',
+      quarter: 'Q2 2024',
+      statusColor: 'bg-yellow-500'
+    },
+    {
+      title: 'Depa Chat Bot Tool',
+      category: 'AI Assistant', 
+      description: 'ChatGPT integration directly inside Revit for intelligent assistance and guidance.',
+      status: 'PLANNED',
+      quarter: 'Q3 2024',
+      statusColor: 'bg-blue-500'
+    },
+    {
+      title: 'QA/QC Tools',
+      category: 'Quality Control',
+      description: 'Advanced quality assurance and control tools for comprehensive model validation.',
+      status: 'IN DEVELOPMENT',
+      quarter: 'Q2 2024', 
+      statusColor: 'bg-yellow-500'
+    }
+  ]
+
   return (
     <>
       {currentVideo && (
@@ -357,7 +426,7 @@ function App() {
               {/* Logo */}
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm">depa</div>
-                <span className="text-lg font-semibold">One Click Plugin</span>
+                <span className="text-lg font-semibold font-audiowide">One Click Plugin</span>
                 <span className="text-xs text-muted-foreground ml-2">
                   Revit Plugin Documentation
                 </span>
@@ -401,7 +470,7 @@ function App() {
                         }}
                         className={`w-full justify-start h-auto p-3 ${
                           isActive 
-                            ? 'bg-muted text-foreground' 
+                            ? 'bg-primary text-primary-foreground border-l-4 border-primary-foreground' 
                             : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                         }`}
                       >
@@ -496,6 +565,20 @@ function App() {
                     const data = panelKey ? panelData[panelKey as keyof typeof panelData] : null
                     
                     if (!data || !panelKey) return null
+                    
+                    // Special handling for "Up Next" section
+                    if (panelKey === 'Up Next') {
+                      return (
+                        <UpNextPage
+                          title={panelKey}
+                          description={data.description}
+                          youtubeUrl={videoUrls[panelKey as keyof typeof videoUrls]}
+                          onPlayVideo={() => openVideo(panelKey)}
+                          overview={data.overview}
+                          futureProjectCards={futureProjectCards}
+                        />
+                      )
+                    }
                     
                     return (
                       <PanelPage
