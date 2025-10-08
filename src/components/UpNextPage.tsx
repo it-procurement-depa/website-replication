@@ -8,6 +8,7 @@ interface FutureProjectCard {
   status: string
   quarter: string
   statusColor: string
+  onClick?: () => void
 }
 
 interface UpNextPageProps {
@@ -112,13 +113,17 @@ export function UpNextPage({
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {futureProjectCards.map((card, index) => (
-            <div key={index} className="bg-card border border-border rounded-lg p-6 hover:border-muted-foreground/20 transition-colors">
+            <div 
+              key={index} 
+              className="bg-card border border-border rounded-lg p-6 hover:border-primary/50 hover:bg-card/80 transition-all duration-200 cursor-pointer group"
+              onClick={card.onClick}
+            >
               {/* Card Header */}
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-2">
                   {getCategoryIcon(card.category)}
                   <div>
-                    <h3 className="font-semibold text-sm">{card.title}</h3>
+                    <h3 className="font-semibold text-sm group-hover:text-primary transition-colors">{card.title}</h3>
                     <p className="text-xs text-muted-foreground">{card.category}</p>
                   </div>
                 </div>
@@ -135,6 +140,7 @@ export function UpNextPage({
               {/* Quarter */}
               <div className="flex items-center justify-between">
                 <span className="text-xs text-muted-foreground">{card.quarter}</span>
+                <ArrowSquareOut className="w-3 h-3 text-muted-foreground group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100" />
               </div>
             </div>
           ))}

@@ -12,6 +12,8 @@ import { Button } from '@/components/ui/button'
 import { VideoPlayer } from '@/components/VideoPlayer'
 import { PanelPage } from '@/components/PanelPage'
 import { UpNextPage } from '@/components/UpNextPage'
+import { toast } from 'sonner'
+import { Toaster } from 'sonner'
 
 function App() {
   const [activeSection, setActiveSection] = useState('all-documentation')
@@ -348,7 +350,10 @@ function App() {
       description: 'Create comprehensive fixation systems for walls with automated placement and sizing.',
       status: 'IN DEVELOPMENT',
       quarter: 'Q2 2024',
-      statusColor: 'bg-yellow-500'
+      statusColor: 'bg-yellow-500',
+      onClick: () => {
+        toast.info('Wall Fixation Tools is coming soon! This feature is currently in development.')
+      }
     },
     {
       title: 'Ceiling Fixation Tools', 
@@ -356,7 +361,10 @@ function App() {
       description: 'Complete fixation system for standard ceilings with intelligent anchor placement.',
       status: 'PLANNED',
       quarter: 'Q3 2024', 
-      statusColor: 'bg-blue-500'
+      statusColor: 'bg-blue-500',
+      onClick: () => {
+        toast.info('Ceiling Fixation Tools is coming soon! This feature is currently planned.')
+      }
     },
     {
       title: 'Ceiling Curved Fixation Tools',
@@ -364,7 +372,10 @@ function App() {
       description: 'Specialized tools for creating fixation systems on curved ceiling surfaces.',
       status: 'PLANNED',
       quarter: 'Q3 2024',
-      statusColor: 'bg-blue-500'
+      statusColor: 'bg-blue-500',
+      onClick: () => {
+        toast.info('Ceiling Curved Fixation Tools is coming soon! This feature is currently planned.')
+      }
     },
     {
       title: 'Floor Fixation Tools',
@@ -372,7 +383,10 @@ function App() {
       description: 'Comprehensive floor fixation system with support for various flooring types.',
       status: 'PLANNED', 
       quarter: 'Q4 2024',
-      statusColor: 'bg-blue-500'
+      statusColor: 'bg-blue-500',
+      onClick: () => {
+        toast.info('Floor Fixation Tools is coming soon! This feature is currently planned.')
+      }
     },
     {
       title: 'Parts Tools',
@@ -380,7 +394,10 @@ function App() {
       description: 'Advanced parts creation with automatic grooves for tiles and enhanced detailing.',
       status: 'TESTING',
       quarter: 'Q1 2024',
-      statusColor: 'bg-green-500'
+      statusColor: 'bg-green-500',
+      onClick: () => {
+        toast.info('Parts Tools is coming soon! This feature is currently in testing.')
+      }
     },
     {
       title: 'Shop Drawings',
@@ -388,7 +405,10 @@ function App() {
       description: 'Automated shop drawing generation with intelligent dimensions and tags.',
       status: 'IN DEVELOPMENT',
       quarter: 'Q2 2024',
-      statusColor: 'bg-yellow-500'
+      statusColor: 'bg-yellow-500',
+      onClick: () => {
+        toast.info('Shop Drawings is coming soon! This feature is currently in development.')
+      }
     },
     {
       title: 'Depa Chat Bot Tool',
@@ -396,7 +416,10 @@ function App() {
       description: 'ChatGPT integration directly inside Revit for intelligent assistance and guidance.',
       status: 'PLANNED',
       quarter: 'Q3 2024',
-      statusColor: 'bg-blue-500'
+      statusColor: 'bg-blue-500',
+      onClick: () => {
+        toast.info('Depa Chat Bot Tool is coming soon! This feature is currently planned.')
+      }
     },
     {
       title: 'QA/QC Tools',
@@ -404,12 +427,27 @@ function App() {
       description: 'Advanced quality assurance and control tools for comprehensive model validation.',
       status: 'IN DEVELOPMENT',
       quarter: 'Q2 2024', 
-      statusColor: 'bg-yellow-500'
+      statusColor: 'bg-yellow-500',
+      onClick: () => {
+        toast.info('QA/QC Tools is coming soon! This feature is currently in development.')
+      }
     }
   ]
 
   return (
     <>
+      <Toaster 
+        position="top-right" 
+        theme="dark"
+        toastOptions={{
+          style: {
+            background: 'var(--card)',
+            border: '1px solid var(--border)',
+            color: 'var(--foreground)',
+          },
+        }}
+      />
+      
       {currentVideo && (
         <VideoPlayer
           title={currentVideo.title}
